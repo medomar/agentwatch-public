@@ -28,6 +28,10 @@ That request is a plain HTTPS GET. It does not include any data about you, your 
 
 If the fetch fails (no network, captive WiFi, GitHub down), the app uses the version of `signatures.json` bundled inside the app at build time, or the most recent one cached locally. **AgentWatch works fully offline.**
 
+### What the landing page sends
+
+If you visit the landing page at <https://medomar.github.io/agentwatch-public/>, your browser makes **one** request to `api.github.com` to display the public download count of the DMG. No personal data is sent in that request — it's the same call you'd make running `gh api repos/medomar/agentwatch-public/releases` from your terminal. The result is cached in your browser's `localStorage` for 5 minutes to keep traffic low. The landing page does not include any other tracking, analytics, or third-party scripts.
+
 ## What AgentWatch stores on your Mac
 
 - A cached copy of `signatures.json` at `~/Library/Caches/Mohaioo.AgentWatch/signatures.json` — used to keep the app working between launches and to pick up registry updates.
