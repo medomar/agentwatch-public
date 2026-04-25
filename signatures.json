@@ -690,5 +690,11 @@
     { "pathFragment": "/.vscode/extensions/", "parentAppName": "Visual Studio Code" },
     { "pathFragment": "/.cursor/extensions/", "parentAppName": "Cursor" },
     { "pathFragment": "/.kiro/extensions/",   "parentAppName": "Kiro" }
-  ]
+  ],
+  "app": {
+    "latestVersion": "1.0.2",
+    "minimumVersion": "1.0.0",
+    "downloadURL": "https://github.com/medomar/agentwatch-public/releases/latest",
+    "releaseNotes": "v1.0.2 — visual redesign, env-var capture, sparklines, in-app update prompts."
+  }
 }

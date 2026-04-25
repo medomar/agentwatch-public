@@ -38,6 +38,34 @@
       "description": "User-folder path fragments that mark a process as belonging to a parent editor (Visual Studio Code, Cursor, Kiro, etc.). Used by the parent-app resolver when no .app bundle exists in argv[0].",
       "type": "array",
       "items": { "$ref": "#/$defs/editorExtensionFolder" }
+    },
+    "app": {
+      "description": "Optional app-update metadata. The running AgentWatch compares its CFBundleShortVersionString against latestVersion (soft prompt) and minimumVersion (hard block). Older app builds that predate this field simply ignore it.",
+      "type": "object",
+      "required": ["latestVersion", "downloadURL"],
+      "additionalProperties": false,
+      "properties": {
+        "latestVersion": {
+          "description": "Newest published app version (dotted decimal, e.g. '1.0.2'). Triggers an update banner when current < latest.",
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        "minimumVersion": {
+          "description": "Hard floor — running apps below this version are forced to update via a blocking overlay. Optional; when absent, no version is forced.",
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        "downloadURL": {
+          "description": "URL the in-app 'Download' button opens. Typically a GitHub Releases /latest pointer so we don't have to update the registry per release.",
+          "type": "string",
+          "format": "uri"
+        },
+        "releaseNotes": {
+          "description": "Optional changelog blurb shown inside the update banner.",
+          "type": "string",
+          "maxLength": 280
+        }
+      }
     }
   },
 
