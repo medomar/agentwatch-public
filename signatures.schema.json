@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medomar.github.io/agentwatch-public/signatures.schema.json",
+  "title": "AgentWatch signatures registry",
+  "description": "Schema for signatures.json — the public registry of AI agent detection rules consumed by the AgentWatch macOS app.",
+  "type": "object",
+  "required": ["schemaVersion", "registryVersion", "providers"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "description": "Bump when the schema shape changes in a backward-incompatible way. The app rejects unknown major versions.",
+      "type": "integer",
+      "const": 1
+    },
+    "registryVersion": {
+      "description": "Calendar-versioned identifier for the registry contents (e.g. 2026-04-25 or 2026-04-25.2 if multiple updates land same day). Used to decide whether a fetched copy beats the cached one.",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}(\\.\\d+)?$"
+    },
+    "providers": {
+      "description": "Detection rules per AI tool. Each provider matches via Clue 1 (process name), Clue 2 (argv keyword), or Clue 3 (network endpoint).",
+      "type": "array",
+      "items": { "$ref": "#/$defs/provider" },
+      "uniqueItems": true
+    },
+    "argumentRuntimePrefixes": {
+      "description": "Process-name prefixes whose argv we scan for AI keywords. Generic node/python/Code Helper hosts go here; everything else short-circuits without an argv read for performance.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1
+    },
+    "localhostEndpoints": {
+      "description": "Localhost (host, port) pairs that strongly imply a local LLM runtime is running, regardless of process name.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/localhostEndpoint" }
+    },
+    "editorExtensionFolders": {
+      "description": "User-folder path fragments that mark a process as belonging to a parent editor (Visual Studio Code, Cursor, Kiro, etc.). Used by the parent-app resolver when no .app bundle exists in argv[0].",
+      "type": "array",
+      "items": { "$ref": "#/$defs/editorExtensionFolder" }
+    }
+  },
+
+  "$defs": {
+    "provider": {
+      "type": "object",
+      "required": ["id", "displayName", "agentType", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "Stable kebab-case identifier — never reused, never changed. Used in app code for analytics or feature gates.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "displayName": {
+          "description": "User-facing label shown in the AgentWatch UI.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "agentType": {
+          "description": "Classification bucket; controls icon and grouping. Falls back to 'unknown' when a provider doesn't fit a named bucket.",
+          "type": "string",
+          "enum": [
+            "claudeCode", "copilot", "gemini", "cursor", "continueExt",
+            "ollama", "lmStudio", "aider", "pythonAIScript", "nodeAIScript",
+            "vsCodeHelper", "codex", "windsurf", "codeium", "tabnine",
+            "deepseek", "mistral", "groq", "xai", "unknown"
+          ]
+        },
+        "icon": { "$ref": "#/$defs/icon" },
+        "processNames": {
+          "description": "Exact matches against kinfo_proc.kp_proc.p_comm. Note: p_comm truncates to 16 chars — entries longer than that will never hit, so use the truncated form (e.g. 'Code Helper (Plu' for 'Code Helper (Plugin)').",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 16 },
+          "uniqueItems": true
+        },
+        "argvKeywords": {
+          "description": "Substrings that, when found anywhere in the joined argv, identify this provider. Only checked when the process name is in argumentRuntimePrefixes (see top-level field).",
+          "type": "array",
+          "items": { "type": "string", "minLength": 2 },
+          "uniqueItems": true
+        },
+        "pathAnchors": {
+          "description": "Stricter alternative to argvKeywords for collision-prone names. A process matches this provider only if at least one anchor is present somewhere in argv. Use for keywords that would otherwise false-match unrelated tools (e.g. 'goose' the SQL migrator vs Block's Goose CLI).",
+          "type": "array",
+          "items": { "type": "string", "minLength": 2 },
+          "uniqueItems": true
+        },
+        "extensionPaths": {
+          "description": "Path fragments characteristic of an editor extension's install location. Adds another way to identify VS Code / Cursor extensions even when the keyword matcher misses.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 2 },
+          "uniqueItems": true
+        },
+        "ipRanges": {
+          "description": "IPv4 CIDR blocks for this provider's API endpoints. Used by Clue 3 (network detection).",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\d{1,3}(\\.\\d{1,3}){3}/(?:[0-9]|[12][0-9]|3[0-2])$"
+          },
+          "uniqueItems": true
+        },
+        "ipRangeConfidence": {
+          "description": "How sure we are about ipRanges. 'high' = observed in our own scans / officially documented; 'medium' = publicly reported; 'low' = likely-but-unverified.",
+          "type": "string",
+          "enum": ["high", "medium", "low"]
+        },
+        "confidence": {
+          "description": "Overall confidence that this provider's signatures are accurate and current. Tier-3 entries from research start as 'low' and get promoted as we verify.",
+          "type": "string",
+          "enum": ["high", "medium", "low"]
+        },
+        "aliases": {
+          "description": "Past names this provider went by. Helps when a tool rebrands (e.g. Codeium → Windsurf Plugin) — UI can fall back to the alias for legacy installs.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "notes": {
+          "description": "Free-form note for registry maintainers — not displayed in the app. Use for caveats, deprecation status, sources.",
+          "type": "string"
+        }
+      },
+      "anyOf": [
+        { "required": ["processNames"] },
+        { "required": ["argvKeywords"] },
+        { "required": ["pathAnchors"] },
+        { "required": ["extensionPaths"] },
+        { "required": ["ipRanges"] }
+      ]
+    },
+
+    "icon": {
+      "description": "Icon descriptor. v1.1 uses unicode glyphs; iconURL is reserved for v1.2+ when we add real provider logos (subject to per-vendor trademark review).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "glyph": {
+          "description": "Single unicode character or short string used as a fallback icon.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4
+        },
+        "iconURL": {
+          "description": "Reserved. Will hold an https URL to a square PNG/SVG once v1.2 lands. Null for now.",
+          "type": ["string", "null"],
+          "format": "uri"
+        }
+      }
+    },
+
+    "localhostEndpoint": {
+      "type": "object",
+      "required": ["host", "port", "label"],
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "type": "string",
+          "enum": ["127.0.0.1", "localhost", "::1"]
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "label": {
+          "description": "Short human-readable name used as the matched-provider tag (e.g. 'Ollama', 'LM Studio').",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        }
+      }
+    },
+
+    "editorExtensionFolder": {
+      "type": "object",
+      "required": ["pathFragment", "parentAppName"],
+      "additionalProperties": false,
+      "properties": {
+        "pathFragment": {
+          "description": "Substring matched against argv[0]. Must include the leading slash and the 'extensions' segment to avoid false positives, e.g. '/.vscode/extensions/'.",
+          "type": "string",
+          "pattern": "^/.+/extensions/$"
+        },
+        "parentAppName": {
+          "description": "Display name to use as the parent app when this fragment matches.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        }
+      }
+    }
+  }
+}

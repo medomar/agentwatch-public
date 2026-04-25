@@ -1,0 +1,694 @@
+{
+  "schemaVersion": 1,
+  "registryVersion": "2026-04-25",
+  "providers": [
+    {
+      "id": "claude-code",
+      "displayName": "Claude Code",
+      "agentType": "claudeCode",
+      "icon": { "glyph": "◈", "iconURL": null },
+      "processNames": ["claude"],
+      "argvKeywords": ["@anthropic-ai/claude-code", "anthropic.claude", "claude-code/cli.js"],
+      "extensionPaths": [".vscode/extensions/anthropic.claude-code-"],
+      "ipRanges": ["160.79.104.0/24", "160.79.100.0/22"],
+      "ipRangeConfidence": "high",
+      "confidence": "high"
+    },
+    {
+      "id": "anthropic-sdk-node",
+      "displayName": "Anthropic SDK (Node)",
+      "agentType": "nodeAIScript",
+      "icon": { "glyph": "⟡", "iconURL": null },
+      "argvKeywords": ["@anthropic-ai/sdk"],
+      "confidence": "high"
+    },
+    {
+      "id": "anthropic-agent-sdk-node",
+      "displayName": "Claude Agent SDK (Node)",
+      "agentType": "nodeAIScript",
+      "icon": { "glyph": "⟡", "iconURL": null },
+      "argvKeywords": ["@anthropic-ai/claude-agent-sdk"],
+      "confidence": "high"
+    },
+    {
+      "id": "anthropic-sdk-python",
+      "displayName": "Anthropic SDK (Python)",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["anthropic"],
+      "pathAnchors": ["site-packages/anthropic", "from anthropic"],
+      "confidence": "high"
+    },
+    {
+      "id": "github-copilot",
+      "displayName": "GitHub Copilot",
+      "agentType": "copilot",
+      "icon": { "glyph": "⬡", "iconURL": null },
+      "argvKeywords": ["github.copilot", "GitHub.copilot"],
+      "extensionPaths": [".vscode/extensions/github.copilot-"],
+      "confidence": "high"
+    },
+    {
+      "id": "github-copilot-chat",
+      "displayName": "GitHub Copilot Chat",
+      "agentType": "copilot",
+      "icon": { "glyph": "⬡", "iconURL": null },
+      "argvKeywords": ["github.copilot-chat", "GitHub.copilot-chat"],
+      "extensionPaths": [".vscode/extensions/github.copilot-chat-"],
+      "confidence": "high"
+    },
+    {
+      "id": "cursor",
+      "displayName": "Cursor",
+      "agentType": "cursor",
+      "icon": { "glyph": "⬟", "iconURL": null },
+      "processNames": ["cursor", "Cursor", "Cursor Helper", "Cursor Helper "],
+      "argvKeywords": ["Cursor.app/Contents", "Cursor Helper"],
+      "confidence": "high",
+      "notes": "Cursor's helper-plugin is the agent host (memory leak source). p_comm truncates 'Cursor Helper (Plugin)' to 16 chars."
+    },
+    {
+      "id": "continue",
+      "displayName": "Continue",
+      "agentType": "continueExt",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["continue.continue", "Continue.continue"],
+      "extensionPaths": [".vscode/extensions/continue.continue-"],
+      "confidence": "high"
+    },
+    {
+      "id": "cline",
+      "displayName": "Cline",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["cline"],
+      "argvKeywords": ["saoudrizwan.claude-dev", "claude-dev"],
+      "extensionPaths": [".vscode/extensions/saoudrizwan.claude-dev-"],
+      "confidence": "high",
+      "notes": "Extension id is the legacy 'saoudrizwan.claude-dev'. Standalone 'cline' CLI also ships in 2026."
+    },
+    {
+      "id": "cody",
+      "displayName": "Cody (Sourcegraph)",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["sourcegraph.cody-ai", "cody-ai"],
+      "extensionPaths": [".vscode/extensions/sourcegraph.cody-ai-"],
+      "confidence": "high"
+    },
+    {
+      "id": "tabnine",
+      "displayName": "Tabnine",
+      "agentType": "tabnine",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["TabNine"],
+      "argvKeywords": ["tabnine.tabnine-vscode", "TabNine.tabnine-vscode"],
+      "extensionPaths": [".vscode/extensions/tabnine.tabnine-vscode-"],
+      "confidence": "high",
+      "notes": "Spawns a real native daemon — unique among VS Code AI extensions. Detectable via Clue 1."
+    },
+    {
+      "id": "codeium-windsurf",
+      "displayName": "Windsurf Plugin",
+      "agentType": "windsurf",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["codeium.codeium", "Codeium.codeium", "Codeium.CodeiumVS"],
+      "extensionPaths": [".vscode/extensions/codeium.codeium-"],
+      "aliases": ["Codeium"],
+      "confidence": "high",
+      "notes": "Rebranded Codeium → Windsurf Plugin. Folder/publisher still 'Codeium.codeium'."
+    },
+    {
+      "id": "amazon-q-aws-toolkit",
+      "displayName": "Amazon Q",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["amazonwebservices.aws-toolkit-vscode", "AmazonWebServices.amazon-q-vscode"],
+      "extensionPaths": [".vscode/extensions/amazonwebservices.amazon-q-vscode-"],
+      "aliases": ["CodeWhisperer"],
+      "confidence": "high",
+      "notes": "Bare 'q' binary too generic for Clue 1; matched via argv path anchors instead."
+    },
+    {
+      "id": "kiro-cli",
+      "displayName": "Kiro CLI",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["kiro", "qterm"],
+      "argvKeywords": ["aws/kiro"],
+      "pathAnchors": ["kiro/cli", "amazon-q"],
+      "aliases": ["Amazon Q CLI"],
+      "confidence": "medium",
+      "notes": "Feb 2026 rebrand of Amazon Q CLI. Binary 'q' still ships during transition but bare 'q' too generic — anchored on path."
+    },
+    {
+      "id": "kiro-ide",
+      "displayName": "Kiro",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["Kiro", "Kiro Helper", "Kiro Helper "],
+      "argvKeywords": ["Kiro.app/Contents", "Kiro Helper"],
+      "confidence": "medium",
+      "notes": "VS Code fork (Cursor-style)."
+    },
+    {
+      "id": "openai-codex",
+      "displayName": "Codex (OpenAI)",
+      "agentType": "codex",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["codex"],
+      "argvKeywords": ["@openai/codex", "openai/codex"],
+      "confidence": "high"
+    },
+    {
+      "id": "gemini-cli",
+      "displayName": "Gemini CLI",
+      "agentType": "gemini",
+      "icon": { "glyph": "◆", "iconURL": null },
+      "processNames": ["gemini"],
+      "argvKeywords": ["@google/gemini-cli", "google-gemini/gemini-cli"],
+      "confidence": "high"
+    },
+    {
+      "id": "gemini-code-assist",
+      "displayName": "Gemini Code Assist",
+      "agentType": "gemini",
+      "icon": { "glyph": "◆", "iconURL": null },
+      "argvKeywords": ["google.geminicodeassist"],
+      "extensionPaths": [".vscode/extensions/google.geminicodeassist-"],
+      "confidence": "high"
+    },
+    {
+      "id": "google-cloud-code",
+      "displayName": "Google Cloud Code",
+      "agentType": "gemini",
+      "icon": { "glyph": "◆", "iconURL": null },
+      "processNames": ["cloudcode_cli"],
+      "argvKeywords": ["googlecloudtools.cloudcode", "cloudcode_cli"],
+      "extensionPaths": [".vscode/extensions/googlecloudtools.cloudcode-"],
+      "confidence": "high"
+    },
+    {
+      "id": "aider",
+      "displayName": "Aider",
+      "agentType": "aider",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["aider"],
+      "argvKeywords": ["aider-chat", "aider/main.py"],
+      "confidence": "high"
+    },
+    {
+      "id": "block-goose-cli",
+      "displayName": "Goose (Block)",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["goose"],
+      "pathAnchors": ["block-goose", "goose-ai", "block/goose"],
+      "confidence": "high",
+      "notes": "Bare 'goose' collides with pressly/goose SQL migrator — require a path anchor."
+    },
+    {
+      "id": "block-goose-desktop",
+      "displayName": "Goose Desktop",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["Goose"],
+      "argvKeywords": ["Goose.app/Contents"],
+      "confidence": "medium"
+    },
+    {
+      "id": "charm-mods",
+      "displayName": "Mods (Charm)",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["mods"],
+      "pathAnchors": ["charmbracelet/mods"],
+      "confidence": "high",
+      "notes": "Bare 'mods' collides with game-mod tooling — require Charm-specific anchor."
+    },
+    {
+      "id": "charm-crush",
+      "displayName": "Crush (Charm)",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["crush"],
+      "argvKeywords": ["charmbracelet/crush", "crush-cli"],
+      "confidence": "high"
+    },
+    {
+      "id": "opencode",
+      "displayName": "OpenCode",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["opencode"],
+      "argvKeywords": ["opencode-ai", "sst/opencode"],
+      "confidence": "high",
+      "notes": "Two competing forks (opencode-ai, sst/opencode) both ship 'opencode' binary."
+    },
+    {
+      "id": "openhands",
+      "displayName": "OpenHands",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["openhands"],
+      "argvKeywords": ["openhands-ai", "openhands/cli"],
+      "aliases": ["OpenDevin"],
+      "confidence": "high"
+    },
+    {
+      "id": "plandex",
+      "displayName": "Plandex",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["plandex", "pdx"],
+      "argvKeywords": ["plandex-ai/plandex"],
+      "confidence": "high"
+    },
+    {
+      "id": "tabby",
+      "displayName": "Tabby (TabbyML)",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["tabby"],
+      "pathAnchors": ["tabbyml/tabby"],
+      "confidence": "high",
+      "notes": "Self-hosted code completion server. Bare 'tabby' collides with Eugeny/tabby SSH terminal — anchor required."
+    },
+    {
+      "id": "ollama",
+      "displayName": "Ollama",
+      "agentType": "ollama",
+      "icon": { "glyph": "◉", "iconURL": null },
+      "processNames": ["ollama"],
+      "argvKeywords": ["ollama serve", "ollama-runner"],
+      "confidence": "high"
+    },
+    {
+      "id": "lm-studio",
+      "displayName": "LM Studio",
+      "agentType": "lmStudio",
+      "icon": { "glyph": "◎", "iconURL": null },
+      "processNames": ["lm-studio", "LM Studio", "lms"],
+      "argvKeywords": ["lm-studio", "LM Studio.app"],
+      "confidence": "high"
+    },
+    {
+      "id": "llama-cpp",
+      "displayName": "llama.cpp",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["llama-server", "llama-cli"],
+      "argvKeywords": ["llama.cpp", "ggml-org/llama.cpp"],
+      "confidence": "high"
+    },
+    {
+      "id": "vllm",
+      "displayName": "vLLM",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["vllm serve", "vllm/entrypoints", "vllm.entrypoints"],
+      "confidence": "high",
+      "notes": "Python entry point. Surfaces as 'python' with 'vllm' in argv."
+    },
+    {
+      "id": "jan",
+      "displayName": "Jan",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["Jan", "Jan Helper", "Jan Helper ", "cortex"],
+      "argvKeywords": ["jan.app/Contents", "cortex.cpp"],
+      "confidence": "high"
+    },
+    {
+      "id": "gpt4all",
+      "displayName": "GPT4All",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["gpt4all", "nomic-ai/gpt4all"],
+      "confidence": "medium",
+      "notes": "Bundle binary historically named 'chat' — too generic for Clue 1. Use Clue 2 (argv) or Clue 3 (port 4891)."
+    },
+    {
+      "id": "mlx-lm",
+      "displayName": "MLX (Apple Silicon)",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["mlx_lm.server", "mlx-lm", "ml-explore/mlx"],
+      "confidence": "high",
+      "notes": "macOS-only Apple Silicon runtime. Surfaces as 'python' with 'mlx_lm' in argv."
+    },
+    {
+      "id": "oobabooga",
+      "displayName": "text-generation-webui",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["text-generation-webui", "oobabooga"],
+      "confidence": "medium"
+    },
+    {
+      "id": "zed",
+      "displayName": "Zed",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "processNames": ["Zed", "zed-server"],
+      "argvKeywords": ["Zed.app/Contents", "zed.dev"],
+      "confidence": "medium",
+      "notes": "Native Rust editor with built-in agent panel — process is part of the editor; detection mostly serves parent-app grouping."
+    },
+    {
+      "id": "openai-sdk-python",
+      "displayName": "OpenAI SDK (Python)",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["openai"],
+      "pathAnchors": ["site-packages/openai", "from openai"],
+      "confidence": "high"
+    },
+    {
+      "id": "openai-sdk-node",
+      "displayName": "OpenAI SDK (Node)",
+      "agentType": "nodeAIScript",
+      "icon": { "glyph": "⟡", "iconURL": null },
+      "argvKeywords": ["from \"openai\"", "openai/api"],
+      "pathAnchors": ["node_modules/openai/"],
+      "confidence": "high"
+    },
+    {
+      "id": "google-genai-node",
+      "displayName": "Google GenAI SDK (Node)",
+      "agentType": "gemini",
+      "icon": { "glyph": "◆", "iconURL": null },
+      "argvKeywords": ["@google/genai", "@google/generative-ai"],
+      "aliases": ["@google/generative-ai (legacy)"],
+      "confidence": "high"
+    },
+    {
+      "id": "google-genai-python",
+      "displayName": "Google GenAI SDK (Python)",
+      "agentType": "gemini",
+      "icon": { "glyph": "◆", "iconURL": null },
+      "argvKeywords": ["google.generativeai", "google.genai"],
+      "confidence": "high"
+    },
+    {
+      "id": "mistral-sdk-python",
+      "displayName": "Mistral SDK (Python)",
+      "agentType": "mistral",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["mistralai"],
+      "pathAnchors": ["site-packages/mistralai", "from mistralai"],
+      "confidence": "high"
+    },
+    {
+      "id": "mistral-sdk-node",
+      "displayName": "Mistral SDK (Node)",
+      "agentType": "mistral",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["@mistralai/mistralai"],
+      "confidence": "high"
+    },
+    {
+      "id": "cohere-sdk-python",
+      "displayName": "Cohere SDK (Python)",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["cohere"],
+      "pathAnchors": ["site-packages/cohere", "import cohere"],
+      "confidence": "high"
+    },
+    {
+      "id": "cohere-sdk-node",
+      "displayName": "Cohere SDK (Node)",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["cohere-ai"],
+      "confidence": "high"
+    },
+    {
+      "id": "groq-sdk-python",
+      "displayName": "Groq SDK (Python)",
+      "agentType": "groq",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["groq"],
+      "pathAnchors": ["site-packages/groq", "from groq"],
+      "confidence": "high"
+    },
+    {
+      "id": "groq-sdk-node",
+      "displayName": "Groq SDK (Node)",
+      "agentType": "groq",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["groq-sdk"],
+      "confidence": "high"
+    },
+    {
+      "id": "vercel-ai-sdk",
+      "displayName": "Vercel AI SDK",
+      "agentType": "nodeAIScript",
+      "icon": { "glyph": "⟡", "iconURL": null },
+      "argvKeywords": ["@ai-sdk/openai", "@ai-sdk/anthropic", "@ai-sdk/google", "@ai-sdk/xai", "@ai-sdk/mistral"],
+      "confidence": "high",
+      "notes": "Multi-provider — match the @ai-sdk/<provider> namespace. Bare 'ai' too generic to match alone."
+    },
+    {
+      "id": "openrouter-sdk",
+      "displayName": "OpenRouter SDK",
+      "agentType": "nodeAIScript",
+      "icon": { "glyph": "⟡", "iconURL": null },
+      "argvKeywords": ["@openrouter/sdk", "@openrouter/ai-sdk-provider", "@openrouter/cli"],
+      "confidence": "high"
+    },
+    {
+      "id": "deepseek-sdk-python",
+      "displayName": "DeepSeek SDK (Python)",
+      "agentType": "deepseek",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["deepseek-ai", "deepseek_ai"],
+      "pathAnchors": ["site-packages/deepseek", "from deepseek"],
+      "confidence": "high"
+    },
+    {
+      "id": "langchain-python",
+      "displayName": "LangChain (Python)",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["langchain", "langchain_core", "langchain_community"],
+      "pathAnchors": ["site-packages/langchain"],
+      "confidence": "high"
+    },
+    {
+      "id": "llama-index",
+      "displayName": "LlamaIndex",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["llama_index", "llama-index"],
+      "confidence": "high"
+    },
+    {
+      "id": "autogen",
+      "displayName": "AutoGen",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["autogen", "autogen-agentchat", "pyautogen", "autogen_agentchat"],
+      "pathAnchors": ["site-packages/autogen"],
+      "confidence": "high"
+    },
+    {
+      "id": "crewai",
+      "displayName": "CrewAI",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["crewai", "crewai_tools"],
+      "confidence": "high"
+    },
+    {
+      "id": "litellm",
+      "displayName": "LiteLLM",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["litellm", "from litellm"],
+      "pathAnchors": ["site-packages/litellm"],
+      "confidence": "high"
+    },
+    {
+      "id": "dspy",
+      "displayName": "DSPy",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["dspy", "dspy-ai"],
+      "pathAnchors": ["site-packages/dspy"],
+      "confidence": "high"
+    },
+    {
+      "id": "huggingface-hub",
+      "displayName": "HuggingFace Hub",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["huggingface_hub", "from huggingface_hub"],
+      "confidence": "high"
+    },
+    {
+      "id": "huggingface-inference-node",
+      "displayName": "HuggingFace Inference (Node)",
+      "agentType": "nodeAIScript",
+      "icon": { "glyph": "⟡", "iconURL": null },
+      "argvKeywords": ["@huggingface/inference"],
+      "confidence": "medium"
+    },
+    {
+      "id": "transformers",
+      "displayName": "Transformers (HuggingFace)",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "pathAnchors": ["site-packages/transformers/", "from transformers import"],
+      "confidence": "medium",
+      "notes": "Bare 'transformers' too generic — anchored on import path or site-packages."
+    },
+    {
+      "id": "replicate-python",
+      "displayName": "Replicate (Python)",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "pathAnchors": ["site-packages/replicate", "import replicate"],
+      "confidence": "medium",
+      "notes": "Bare 'replicate' collides with rsync/data tools — anchor required."
+    },
+    {
+      "id": "together-python",
+      "displayName": "Together AI (Python)",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "pathAnchors": ["site-packages/together", "from together import"],
+      "confidence": "medium",
+      "notes": "'together' is generic English — anchor required."
+    },
+    {
+      "id": "instructor-python",
+      "displayName": "Instructor",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "pathAnchors": ["site-packages/instructor", "import instructor"],
+      "confidence": "low",
+      "notes": "'instructor' collides with educational/teaching libs — anchor required."
+    },
+    {
+      "id": "haystack-ai",
+      "displayName": "Haystack",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["haystack-ai", "farm-haystack", "from haystack"],
+      "pathAnchors": ["site-packages/haystack"],
+      "confidence": "medium"
+    },
+    {
+      "id": "semantic-kernel",
+      "displayName": "Semantic Kernel",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["semantic_kernel", "semantic-kernel"],
+      "confidence": "medium"
+    },
+    {
+      "id": "guidance",
+      "displayName": "Guidance (Microsoft)",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "pathAnchors": ["site-packages/guidance", "from guidance"],
+      "confidence": "low",
+      "notes": "'guidance' very generic — anchor required."
+    },
+    {
+      "id": "roo-code",
+      "displayName": "Roo Code (deprecated)",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["rooveterinaryinc.roo-cline", "RooVeterinaryInc.roo-cline"],
+      "extensionPaths": [".vscode/extensions/rooveterinaryinc.roo-cline-"],
+      "confidence": "medium",
+      "notes": "Last release May 2025, repo archived — kept for legacy installs."
+    },
+    {
+      "id": "blackbox-ai",
+      "displayName": "BLACKBOXAI",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["blackboxapp.blackbox", "Blackboxapp.blackbox"],
+      "extensionPaths": [".vscode/extensions/blackboxapp.blackbox-"],
+      "confidence": "low",
+      "notes": "Publisher id not directly verified — flagged for confirmation on first detection."
+    },
+    {
+      "id": "qodo-gen",
+      "displayName": "Qodo Gen",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["codium.codium", "codium.qodogen", "Codium.codium", "Codium.qodogen"],
+      "extensionPaths": [".vscode/extensions/codium.qodogen-", ".vscode/extensions/codium.codium-"],
+      "confidence": "medium",
+      "notes": "Publisher 'Codium' (NOT 'Codeium' — different vendor)."
+    },
+    {
+      "id": "openhands-vscode",
+      "displayName": "OpenHands (VS Code)",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["openhands", "all-hands-ai"],
+      "extensionPaths": [".vscode/extensions/openhands-"],
+      "confidence": "low",
+      "notes": "Cloud-tied; couldn't fully confirm marketplace publisher id."
+    },
+    {
+      "id": "autogpt",
+      "displayName": "AutoGPT",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["autogpt", "auto-gpt"],
+      "pathAnchors": ["site-packages/autogpt"],
+      "confidence": "low",
+      "notes": "Largely abandoned 2025-2026; signature kept for legacy installs."
+    },
+    {
+      "id": "metagpt",
+      "displayName": "MetaGPT",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["metagpt"],
+      "pathAnchors": ["site-packages/metagpt"],
+      "confidence": "low"
+    },
+    {
+      "id": "swe-agent",
+      "displayName": "SWE-agent",
+      "agentType": "pythonAIScript",
+      "icon": { "glyph": "⟐", "iconURL": null },
+      "argvKeywords": ["sweagent", "princeton-nlp/SWE-agent"],
+      "confidence": "low",
+      "notes": "Mostly used as a benchmarking harness, not interactively."
+    },
+    {
+      "id": "devin-desktop",
+      "displayName": "Devin (desktop)",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "argvKeywords": ["Devin.app/Contents", "cognition-labs/devin"],
+      "confidence": "low",
+      "notes": "Cognition Devin is cloud-only; desktop app is a thin client. Flagged as AI-adjacent."
+    }
+  ],
+  "argumentRuntimePrefixes": ["node", "python", "Code Helper"],
+  "localhostEndpoints": [
+    { "host": "127.0.0.1", "port": 11434, "label": "Ollama" },
+    { "host": "127.0.0.1", "port": 1234,  "label": "LM Studio" },
+    { "host": "127.0.0.1", "port": 8000,  "label": "vLLM" },
+    { "host": "127.0.0.1", "port": 1337,  "label": "Jan" },
+    { "host": "127.0.0.1", "port": 4891,  "label": "GPT4All" },
+    { "host": "127.0.0.1", "port": 8080,  "label": "Local LLM (llama.cpp / Tabby / MLX)" },
+    { "host": "127.0.0.1", "port": 7860,  "label": "text-generation-webui (UI)" },
+    { "host": "127.0.0.1", "port": 5000,  "label": "text-generation-webui (API)" }
+  ],
+  "editorExtensionFolders": [
+    { "pathFragment": "/.vscode/extensions/", "parentAppName": "Visual Studio Code" },
+    { "pathFragment": "/.cursor/extensions/", "parentAppName": "Cursor" },
+    { "pathFragment": "/.kiro/extensions/",   "parentAppName": "Kiro" }
+  ]
+}

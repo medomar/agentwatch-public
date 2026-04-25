@@ -1,0 +1,63 @@
+name: Validate registry
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "signatures.json"
+      - "signatures.schema.json"
+      - ".github/workflows/validate.yml"
+  pull_request:
+    paths:
+      - "signatures.json"
+      - "signatures.schema.json"
+      - ".github/workflows/validate.yml"
+
+jobs:
+  validate:
+    name: Schema + semantic checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install ajv-cli
+        run: npm install --no-save ajv-cli@5 ajv-formats@3
+
+      - name: Validate signatures.json against schema
+        run: |
+          npx ajv validate \
+            --spec=draft2020 \
+            -c ajv-formats \
+            -s signatures.schema.json \
+            -d signatures.json \
+            --strict=false
+
+      - name: Check provider id uniqueness
+        run: |
+          # The JSON Schema 'uniqueItems' on providers compares whole
+          # objects, not just ids. A typo'd duplicate id with different
+          # other fields would slip through. This sanity-check catches it.
+          node -e "
+            const fs = require('fs');
+            const reg = JSON.parse(fs.readFileSync('signatures.json', 'utf8'));
+            const ids = reg.providers.map(p => p.id);
+            const seen = new Set();
+            const dupes = [];
+            for (const id of ids) {
+              if (seen.has(id)) dupes.push(id);
+              seen.add(id);
+            }
+            if (dupes.length) {
+              console.error('Duplicate provider ids:', dupes.join(', '));
+              process.exit(1);
+            }
+            console.log('OK — ' + ids.length + ' unique provider ids.');
+          "
