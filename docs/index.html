@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgentWatch — public registry</title>
+  <meta name="description" content="Public registry of AI agent detection signatures used by the AgentWatch macOS app.">
+  <meta name="color-scheme" content="light dark">
+
+  <style>
+    :root {
+      --fg: #1d1d1f;
+      --fg-muted: #6e6e73;
+      --bg: #fafafa;
+      --card: #ffffff;
+      --border: #e5e5e7;
+      --accent: #0066cc;
+      --code-bg: #f4f4f5;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fg: #f5f5f7;
+        --fg-muted: #98989d;
+        --bg: #1d1d1f;
+        --card: #2c2c2e;
+        --border: #3a3a3c;
+        --accent: #4d9eff;
+        --code-bg: #2c2c2e;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font: 16px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      padding: 48px 20px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 36px; line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.02em; }
+    h2 { font-size: 20px; margin: 32px 0 12px; letter-spacing: -0.01em; }
+    p { margin: 0 0 14px; color: var(--fg); }
+    p.lede { font-size: 18px; color: var(--fg-muted); margin-bottom: 28px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    code {
+      font: 13px/1.4 "SF Mono", Menlo, Consolas, monospace;
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    pre {
+      font: 13px/1.5 "SF Mono", Menlo, Consolas, monospace;
+      background: var(--code-bg);
+      padding: 14px 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 0 0 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--code-bg);
+      color: var(--fg-muted);
+      margin-bottom: 18px;
+    }
+    .card {
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 14px 0;
+    }
+    .card h3 { margin: 0 0 4px; font-size: 16px; }
+    .card p { color: var(--fg-muted); font-size: 14px; margin: 0; }
+
+    footer {
+      margin-top: 56px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--fg-muted);
+      font-size: 13px;
+    }
+    footer a { color: var(--fg-muted); }
+  </style>
+</head>
+<body>
+
+  <span class="badge">Public registry · v1</span>
+  <h1>AgentWatch</h1>
+  <p class="lede">A macOS menu bar app that tells you which AI agents are running on your machine, what they're using, and lets you pause or kill them. This site hosts the public registry that powers the app's detection.</p>
+
+  <h2>Registry</h2>
+
+  <a class="card" href="https://raw.githubusercontent.com/medomar/agentwatch-public/main/signatures.json">
+    <h3>signatures.json</h3>
+    <p>The detection rule set. 73 providers, 8 local-runtime endpoints, calendar-versioned. Fetched by AgentWatch on every launch.</p>
+  </a>
+
+  <a class="card" href="https://raw.githubusercontent.com/medomar/agentwatch-public/main/signatures.schema.json">
+    <h3>signatures.schema.json</h3>
+    <p>The JSON Schema (Draft 2020-12) the registry validates against. Use it if you're building tooling on top of the data.</p>
+  </a>
+
+  <h2>How it works</h2>
+  <p>AgentWatch detects AI processes using three clues, in order — first match wins:</p>
+  <ol>
+    <li><strong>Process name</strong> match against the truncated <code>kp_proc.p_comm</code> (e.g. <code>claude</code>, <code>aider</code>, <code>ollama</code>).</li>
+    <li><strong>Argv keyword</strong> match for processes hosted in a generic runtime — <code>node</code>, <code>python</code>, VS Code's <code>Code Helper</code>.</li>
+    <li><strong>Network</strong> connection to a known localhost port or AI provider IP range.</li>
+  </ol>
+  <p>The registry tells the app what to look for. Update the registry, every running AgentWatch picks up the change on its next launch.</p>
+
+  <h2>Use it from your own tooling</h2>
+  <pre>curl -s https://raw.githubusercontent.com/medomar/agentwatch-public/main/signatures.json \
+  | jq '.providers[] | select(.confidence == "high") | .id'</pre>
+  <p>Licensed MIT. The registry data is not a trademark of the AI products it identifies — it's a fingerprint catalogue for detection.</p>
+
+  <h2>Contribute</h2>
+  <p>Open a PR to add a new AI tool or fix an existing entry. CI validates every PR against the schema. See the <a href="https://github.com/medomar/agentwatch-public#contributing">contribution guide</a> for the conventions (kebab-case ids, 16-char <code>processNames</code> cap, banned generic keywords like <code>chat</code>/<code>gpt</code>/<code>llm</code>).</p>
+
+  <footer>
+    <p>
+      <a href="https://github.com/medomar/agentwatch-public">github.com/medomar/agentwatch-public</a> ·
+      Maintained by <a href="https://github.com/medomar">@medomar</a>
+    </p>
+  </footer>
+
+</body>
+</html>
