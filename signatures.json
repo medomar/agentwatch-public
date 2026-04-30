@@ -11,6 +11,7 @@
       "argvKeywords": ["@anthropic-ai/claude-code", "anthropic.claude", "claude-code/cli.js"],
       "extensionPaths": [".vscode/extensions/anthropic.claude-code-"],
       "openFilePatterns": ["/.claude/commands/", "/.claude/settings.json", "@anthropic-ai/claude-code"],
+      "envKeywords": ["CLAUDE_CODE_*", "ANTHROPIC_API_KEY"],
       "ipRanges": ["160.79.104.0/24", "160.79.100.0/22"],
       "ipRangeConfidence": "high",
       "confidence": "high"
@@ -21,6 +22,7 @@
       "agentType": "nodeAIScript",
       "icon": { "glyph": "⟡", "iconURL": null },
       "argvKeywords": ["@anthropic-ai/sdk"],
+      "envKeywords": ["ANTHROPIC_API_KEY", "ANTHROPIC_BASE_URL"],
       "confidence": "high"
     },
     {
@@ -29,6 +31,7 @@
       "agentType": "nodeAIScript",
       "icon": { "glyph": "⟡", "iconURL": null },
       "argvKeywords": ["@anthropic-ai/claude-agent-sdk"],
+      "envKeywords": ["ANTHROPIC_API_KEY"],
       "confidence": "high"
     },
     {
@@ -38,6 +41,7 @@
       "icon": { "glyph": "⟐", "iconURL": null },
       "argvKeywords": ["anthropic"],
       "pathAnchors": ["site-packages/anthropic", "from anthropic"],
+      "envKeywords": ["ANTHROPIC_API_KEY", "ANTHROPIC_BASE_URL"],
       "confidence": "high"
     },
     {
@@ -196,6 +200,7 @@
       "icon": { "glyph": "◌", "iconURL": null },
       "processNames": ["aider"],
       "argvKeywords": ["aider-chat", "aider/main.py"],
+      "envKeywords": ["AIDER_*"],
       "confidence": "high"
     },
     {
@@ -363,6 +368,7 @@
       "icon": { "glyph": "⟐", "iconURL": null },
       "argvKeywords": ["openai"],
       "pathAnchors": ["site-packages/openai", "from openai"],
+      "envKeywords": ["OPENAI_API_KEY", "OPENAI_BASE_URL"],
       "confidence": "high"
     },
     {
@@ -372,6 +378,7 @@
       "icon": { "glyph": "⟡", "iconURL": null },
       "argvKeywords": ["from \"openai\"", "openai/api"],
       "pathAnchors": ["node_modules/openai/"],
+      "envKeywords": ["OPENAI_API_KEY", "OPENAI_BASE_URL"],
       "confidence": "high"
     },
     {
