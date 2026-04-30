@@ -123,6 +123,12 @@
           "items": { "type": "string", "minLength": 2 },
           "uniqueItems": true
         },
+        "openFilePatterns": {
+          "description": "Substrings matched against the canonical paths of vnode-backed file descriptors held by the process (PROC_PIDFDVNODEPATHINFO). Catches runtimes that hide their argv via process.title rewrites — the kernel still tracks which script the runtime loaded, so e.g. Claude Code's `node` PID will have '@anthropic-ai/claude-code/cli.js' in its fd table even after argv has been mangled. Only checked when the process name is in argumentRuntimePrefixes.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 2 },
+          "uniqueItems": true
+        },
         "ipRanges": {
           "description": "IPv4 CIDR blocks for this provider's API endpoints. Used by Clue 3 (network detection).",
           "type": "array",
@@ -158,6 +164,7 @@
         { "required": ["argvKeywords"] },
         { "required": ["pathAnchors"] },
         { "required": ["extensionPaths"] },
+        { "required": ["openFilePatterns"] },
         { "required": ["ipRanges"] }
       ]
     },
