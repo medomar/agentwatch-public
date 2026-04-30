@@ -135,6 +135,12 @@
           "items": { "type": "string", "minLength": 2, "pattern": "^[A-Z][A-Z0-9_]*\\*?$" },
           "uniqueItems": true
         },
+        "dylibPatterns": {
+          "description": "Substrings matched against the canonical paths of mapped VM regions returned by PROC_PIDREGIONPATHINFO. Catches native model runtimes (libllama, libonnxruntime, CoreML model packages) regardless of host process name. The scanner gates this signal behind a 200MB RSS floor — VM-region walking is expensive and small node/python processes would surface only system-library noise.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 2 },
+          "uniqueItems": true
+        },
         "ipRanges": {
           "description": "IPv4 CIDR blocks for this provider's API endpoints. Used by Clue 3 (network detection).",
           "type": "array",
@@ -172,6 +178,7 @@
         { "required": ["extensionPaths"] },
         { "required": ["openFilePatterns"] },
         { "required": ["envKeywords"] },
+        { "required": ["dylibPatterns"] },
         { "required": ["ipRanges"] }
       ]
     },

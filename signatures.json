@@ -305,7 +305,35 @@
       "icon": { "glyph": "◌", "iconURL": null },
       "processNames": ["llama-server", "llama-cli"],
       "argvKeywords": ["llama.cpp", "ggml-org/llama.cpp"],
+      "dylibPatterns": ["libllama", "libggml", "libmtmd"],
       "confidence": "high"
+    },
+    {
+      "id": "onnxruntime",
+      "displayName": "ONNX Runtime",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "dylibPatterns": ["libonnxruntime"],
+      "confidence": "high",
+      "notes": "Native model runtime; surfaces large processes that load ONNX weights regardless of host process name."
+    },
+    {
+      "id": "coreml-runtime",
+      "displayName": "Apple Core ML",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "dylibPatterns": [".mlmodelc/", "/CoreML.framework/"],
+      "confidence": "medium",
+      "notes": "Catches processes hosting compiled CoreML models. Many apps load Core ML for non-AI features (Photos, etc.); rely on the scorer to keep this from over-firing."
+    },
+    {
+      "id": "mlx-runtime",
+      "displayName": "MLX",
+      "agentType": "unknown",
+      "icon": { "glyph": "◌", "iconURL": null },
+      "dylibPatterns": ["libmlx", "site-packages/mlx/"],
+      "confidence": "medium",
+      "notes": "Apple Silicon MLX framework. Most often surfaces as a python process holding the native lib."
     },
     {
       "id": "vllm",
