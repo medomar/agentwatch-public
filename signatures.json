@@ -10,7 +10,7 @@
       "processNames": ["claude"],
       "argvKeywords": ["@anthropic-ai/claude-code", "anthropic.claude", "claude-code/cli.js"],
       "extensionPaths": [".vscode/extensions/anthropic.claude-code-"],
-      "openFilePatterns": ["@anthropic-ai/claude-code/cli.js", "@anthropic-ai/claude-code"],
+      "openFilePatterns": ["/.claude/commands/", "/.claude/settings.json", "@anthropic-ai/claude-code"],
       "ipRanges": ["160.79.104.0/24", "160.79.100.0/22"],
       "ipRangeConfidence": "high",
       "confidence": "high"
