@@ -3,7 +3,7 @@
 **See which AI agents are running on your Mac.** A tiny menu bar app that shows you what's using your CPU and RAM — Claude, Cursor, Ollama, Aider, and 70+ others — and lets you pause or kill them in two clicks.
 
 - 🌐 **Website:** [medomar.github.io/agentwatch-public](https://medomar.github.io/agentwatch-public/)
-- ⬇️ **Download (macOS):** [AgentWatch.dmg](https://github.com/medomar/agentwatch-public/releases/download/app-v1.0.4/AgentWatch.dmg) — latest stable, `app-v1.0.4`
+- ⬇️ **Download (macOS):** [AgentWatch.dmg](https://github.com/medomar/agentwatch-public/releases/download/app-v1.0.5/AgentWatch.dmg) — latest stable, `app-v1.0.5`
 - 🔒 **Privacy:** [PRIVACY.md](./PRIVACY.md) — one JSON fetch on launch, nothing else leaves your Mac
 - 🐛 **Issues / feedback:** [open an issue](https://github.com/medomar/agentwatch-public/issues)
 
